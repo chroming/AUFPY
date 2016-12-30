@@ -5,6 +5,9 @@ import time
 
 
 class ConnSqlite(object):
+    """
+    sqlite连接类
+    """
 
     def __init__(self):
         self.conn = sqlite3.connect('SECRET.DB')
