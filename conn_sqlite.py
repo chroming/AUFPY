@@ -1,4 +1,4 @@
-# coding:utf-8
+# coding: utf-8
 
 import sqlite3
 import time
@@ -25,9 +25,10 @@ class ConnSqlite(object):
         self.conn.commit()
 
     def select_code(self, name):
-        select_sql = "SELECT secret_code from TOTP where name=%s" % name
+        select_sql = "SELECT SECRETCODE from TOTP where name='%s'" % name
         print select_sql
         self.cursor.execute(select_sql)
+        return self.cursor.fetchone()
 
     def close_conn(self):
         self.conn.close()

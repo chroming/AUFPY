@@ -14,7 +14,8 @@ def get_code(_secret):
     """
     totp = pyotp.TOTP(_secret)
     _now_code = totp.now()
-    return _now_code
+    residual_time = int(30 - time.mktime(datetime.datetime.now().timetuple()) % 30)
+    return _now_code, residual_time
 
 
 def get_loop(_secret):
@@ -27,7 +28,7 @@ def get_loop(_secret):
     while True:
         residual_time = int(30 - time.mktime(datetime.datetime.now().timetuple()) % 30)
         if residual_time == 30:
-            now_code = get_code(_secret)
+            now_code, _ = get_code(_secret)
             print now_code
         time.sleep(1)
 
