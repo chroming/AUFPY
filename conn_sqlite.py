@@ -18,8 +18,8 @@ class ConnSqlite(object):
                      "NAME varchar(20), SECRETCODE varchar(50), TIME varchar(30))"
         self.cursor.execute(create_sql)
 
-    def insert_value(self, name, secret_code):
-        insert_sql = "INSERT INTO TOTP (NAME, SECRETCODE, TIME) VALUES ('%s', '%s', '%s')" % (name, secret_code, time.strftime("%Y%m%d%H%M%S", time.localtime()))
+    def insert_value(self, name, secret):
+        insert_sql = "INSERT INTO TOTP (NAME, SECRETCODE, TIME) VALUES ('%s', '%s', '%s')" % (name, secret, time.strftime("%Y%m%d%H%M%S", time.localtime()))
         print insert_sql
         self.cursor.execute(insert_sql)
         self.conn.commit()
