@@ -20,13 +20,11 @@ class ConnSqlite(object):
 
     def insert_value(self, name, secret):
         insert_sql = "INSERT INTO TOTP (NAME, SECRETCODE, TIME) VALUES ('%s', '%s', '%s')" % (name, secret, time.strftime("%Y%m%d%H%M%S", time.localtime()))
-        print insert_sql
         self.cursor.execute(insert_sql)
         self.conn.commit()
 
     def select_code(self, name):
         select_sql = "SELECT SECRETCODE from TOTP where name='%s'" % name
-        print select_sql
         self.cursor.execute(select_sql)
         return self.cursor.fetchone()
 
