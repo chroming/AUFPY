@@ -10,8 +10,8 @@ class MainUI(ui.View):
         self.name = 'AUFPY'
         self.background_color = 'white'
         self.conn = ConnSqlite()
-        self._init_view()
         self.present('123')
+        self._init_view()
 
     def _init_view(self):
         """
@@ -20,18 +20,20 @@ class MainUI(ui.View):
         """
         self.code_text = ntextfield(self)
         self.code_text.center = (self.width * maincenter['code_text'][0], self.height * maincenter['code_text'][1])
+        self.code_text.width *= mainsize['code_text'][0]
+        self.code_text.height *= mainsize['code_text'][1]
         self.code_text.enabled = False
-        self.name_text = ntextfield(self)
-        self.name_text.width *= mainsize['code_text'][0]
-        self.name_text.height *= mainsize['code_text'][1]
-        self.name_text.center = (self.width * maincenter['name_text'][0], self.height * maincenter['name_text'][1])
-        self.name_text.enabled = False
-        self.add_subview(self.name_text)
+        self.name_label = nlabel(self)
+        self.name_label.width *= mainsize['name_label'][0]
+        self.name_label.height *= mainsize['name_label'][1]
+        self.name_label.center = (self.width * maincenter['name_label'][0], self.height * maincenter['name_label'][1])
+        self.name_label.enabled = False
+        self.add_subview(self.name_label)
         self.add_subview(self.code_text)
 
     def _set_text(self, code_text, name_text):
         self.code_text.text = code_text
-        self.name_text.text = name_text
+        self.name_label.text = name_text
 
     def get_text(self, name_text):
         """

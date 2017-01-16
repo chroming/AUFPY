@@ -9,8 +9,8 @@ class InputView(ui.View):
         self.name = "INPUT NAME & CODE"
         self.background_color = 'white'
         self.conn = ConnSqlite()
-        self._init_view()
         self.present('123')
+        self._init_view()
 
     def _init_view(self):
         self.name_label = nlabel(self)

@@ -9,11 +9,11 @@ import ui
 def ntextfield(view):
     textfield = ui.TextField()
 
-    textfield.border_color = 'black'
-    textfield.border_width = 2
+    # textfield.border_color = 'black'
+    # textfield.border_width = 2
 
-    textfield.width = view.width * 4
-    textfield.height = view.height * 0.3
+    textfield.width = view.width * 0.8
+    textfield.height = view.height * 0.05
 
     return textfield
 
@@ -21,8 +21,8 @@ def ntextfield(view):
 def nlabel(view):
     label = ui.Label()
 
-    label.width = view.width * 2
-    label.height = view.height * 0.5
+    label.width = view.width * 0.3
+    label.height = view.height * 0.05
 
     return label
 
@@ -33,7 +33,7 @@ def nbutton(view):
     button.border_color = 'black'
     button.border_width = 2
 
-    button.width = view.width * 0.7
-    button.height = view.height * 0.5
+    button.width = view.width * 0.2
+    button.height = view.height * 0.05
 
     return button
