@@ -14,8 +14,8 @@ class ConnSqlite(object):
         self.cursor = self.conn.cursor()
 
     def create_table(self):
-        create_sql = "CREATE TABLE TOTP (ID varchar(20) primary key, " \
-                     "NAME varchar(20), SECRETCODE varchar(50), TIME varchar(30))"
+        create_sql = "CREATE TABLE TOTP (ID INTEGER PRIMARY KEY AUTOINCREMENT, " \
+                     "NAME varchar(20) NOT NULL, SECRETCODE varchar(50) NOT NULL UNIQUE, TIME varchar(30))"
         self.cursor.execute(create_sql)
 
     def insert_value(self, name, secret):
