@@ -6,12 +6,14 @@
 
 maincenter = {
     'code_text': (0.5, 0.05),
-    'name_label': (0.2, 0.1)
+    'name_label': (0.2, 0.1),
+    'add_button': (0.5, 0.2)
 }
 
 mainsize = {
     'code_text': (0.3, 1),
-    'name_label': (0.5, 0.5)
+    'name_label': (0.5, 0.5),
+    'add_button': (1, 1)
 }
 
 inputcenter = {
