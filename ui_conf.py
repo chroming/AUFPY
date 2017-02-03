@@ -6,18 +6,18 @@
 
 maincenter = {
     'code_text': (0.5, 0.05),
-    'name_label': (0.2, 0.1),
+    'account_label': (0.2, 0.1),
     'add_button': (0.5, 0.2)
 }
 
 mainsize = {
     'code_text': (0.3, 1),
-    'name_label': (0.5, 0.5),
+    'account_label': (0.5, 0.5),
     'add_button': (1, 1)
 }
 
 inputcenter = {
-    'name_label': (0.2, 0.05),
+    'account_label': (0.2, 0.05),
     'name_textfield': (0.45, 0.1),
     'code_label': (0.2, 0.15),
     'code_textfield': (0.45, 0.2),
@@ -26,7 +26,7 @@ inputcenter = {
 }
 
 inputsize = {
-    'name_label': (1, 1),
+    'account_label': (1, 1),
     'name_textfield': (1, 1),
     'code_label': (1, 1),
     'code_textfield': (1, 1),

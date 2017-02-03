@@ -14,7 +14,7 @@ class InputView(ui.View):
 
     def _init_view(self):
         self.name_label = nlabel(self)
-        self.name_label.center = (self.width * inputcenter['name_label'][0], self.height * inputcenter['name_label'][1])
+        self.name_label.center = (self.width * inputcenter['account_label'][0], self.height * inputcenter['account_label'][1])
         self.name_label.text = "ACCOUNT"
         self.name_textfield = ntextfield(self)
         self.name_textfield.center = (self.width * inputcenter['name_textfield'][0],
