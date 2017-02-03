@@ -40,12 +40,15 @@ class MainUI(ui.View):
             self.add_subview(account_label)
 
         self.add_button = nbutton(self)
+        self.button.title = 'ADD'
         self.add_button.width *= mainsize['add_button'][0]
         self.add_button.height *= mainsize['add_button'][1]
         self.add_button.center = (self.width * maincenter['add_button'][0], self.height * maincenter['add_button'][1])
         self.add_button.action = self.add_button_tapped
 
         self.add_subview(self.add_button)
+
+
 
     def _init_view(self):
         """
@@ -75,7 +78,7 @@ class MainUI(ui.View):
         self.add_subview(self.add_button)
 
     def show_input_dialog(self):
-        dialogs.form_dialog(fields=[{'type': 'text', 'key': 'account', 'title': 'account'},
+        return dialogs.form_dialog(fields=[{'type': 'text', 'key': 'account', 'title': 'account'},
                                    {'type': 'text', 'key': 'key', 'title': 'secret key'}])
 
     def add_button_tapped(self, sender):

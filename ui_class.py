@@ -35,6 +35,8 @@ def nbutton(view):
     button.width = view.width * 0.2
     button.height = view.height * 0.05
 
+    button.tint_color = 'black'
+
     return button
 
 
