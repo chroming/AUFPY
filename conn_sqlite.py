@@ -36,3 +36,7 @@ class ConnSqlite(object):
     def close_conn(self):
         self.conn.close()
 
+if __name__ == '__main__':
+    conn = ConnSqlite()
+    conn.create_table()
+
