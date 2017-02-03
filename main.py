@@ -46,9 +46,12 @@ class MainUI(ui.View):
         self.add_button.center = (self.width * maincenter['add_button'][0], self.height * maincenter['add_button'][1])
         self.add_button.action = self.add_button_tapped
 
-        self.add_subview(self.add_button)
+        # self.add_subview(self.add_button)
 
-
+        self.add_button_item = ui.ButtonItem()
+        self.add_button_item.title = 'ADD'
+        self.add_button_item.action = self.add_button_tapped
+        self.right_button_items = [self.add_button_item]
 
     def _init_view(self):
         """
