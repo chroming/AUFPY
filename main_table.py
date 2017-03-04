@@ -6,12 +6,15 @@ import dialogs
 import notification
 
 
-def _show_all_texts(code_texts, all_accounts):
+def _show_all_texts(code_texts):
     len_c = len(code_texts)
-    codes_accounts = [(code_texts[x], all_accounts[x]) for x in range(len_c)]
+    codes_accounts = [(code_texts[x], name_texts[x]) for x in range(len_c)]
     main_ui.data_source = ui.ListDataSource(['%s -- %s' % (x, y) for x, y in codes_accounts])
-    main_ui.present()
-    auto_reload()
+    if not main_ui.on_screen:
+        main_ui.present()
+        return auto_reload()
+    else:
+        main_ui.reload()
 
 
 def reload_all_texts(code_texts, all_accounts):
@@ -32,7 +35,7 @@ def _get_all_codes():
     for c in name_texts:
         code_text, countdown = get_code(conn.select_code(c)[0])
         code_texts.append(code_text)
-    _show_all_texts(code_texts, name_texts)
+    _show_all_texts(code_texts)
 
 
 def get_all_accounts():
@@ -43,12 +46,12 @@ def get_all_accounts():
     """
     names = conn.select_all()
     name_texts = [name[0] for name in names]
-    _get_all_codes()
+    return _get_all_codes()
 
 
 def add_button_tapped(sender):
     get_input_dict = show_input_dialog()
-    _save_to_db(get_input_dict) if get_input_dict else None
+    return _save_to_db(get_input_dict) if get_input_dict else None
 
 
 def show_input_dialog():
@@ -57,6 +60,7 @@ def show_input_dialog():
 
 
 def _save_to_db(new_dict):
+    global countdown
     conn = ConnSqlite()
     account = new_dict['account']
     key = new_dict['key']
@@ -72,7 +76,6 @@ def auto_reload():
         countdown -= 1
         if countdown == 0:
             _get_all_codes()
-            break
         else:
             time_button_item.title = '%s' % str(countdown)
             main_ui.reload()
