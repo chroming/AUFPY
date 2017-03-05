@@ -26,6 +26,7 @@ def reload_all_texts(code_texts, all_accounts):
 
 def _get_all_codes():
     global countdown
+    conn = ConnSqlite()
     """
     根据名称 list 获取 code_texts 列表并调用 _show_all_texts
     :param name_texts: 名称 list
@@ -35,17 +36,20 @@ def _get_all_codes():
     for c in name_texts:
         code_text, countdown = get_code(conn.select_code(c)[0])
         code_texts.append(code_text)
+    conn.close_conn()
     _show_all_texts(code_texts)
 
 
 def get_all_accounts():
     global name_texts
+    conn = ConnSqlite()
     """
     从sqlite 中获取所有名称 并调用get_texts
     :return: None
     """
     names = conn.select_all()
     name_texts = [name[0] for name in names]
+    conn.close_conn()
     return _get_all_codes()
 
 
@@ -61,27 +65,42 @@ def show_input_dialog():
 
 def _save_to_db(new_dict):
     global countdown
-    conn = ConnSqlite()
+    con = ConnSqlite()
     account = new_dict['account']
     key = new_dict['key']
     if account and key:
-        conn.insert_value(account, key)
-        notification.schedule('Add success!', 1)
-    conn.close_conn()
+        if check_key(key):
+            con.insert_value(account, key)
+            notification.schedule('Add success!', 0)
+            con.close_conn()
+            countdown = 1
+        else:
+            notification.schedule('Key wrong!', 0)
+            con.close_conn()
+            return add_button_tapped(None)
+
+
+def check_key(key):
+    try:
+        get_code(key)
+        return True
+    except:
+        return False
 
 
 def auto_reload():
     global countdown
-    while main_ui.on_screen:
+    while True:
         countdown -= 1
         if countdown == 0:
-            _get_all_codes()
+            get_all_accounts()
         else:
             time_button_item.title = '%s' % str(countdown)
             main_ui.reload()
             time.sleep(1)
 
-countdown = '*'
+
+countdown = 30
 main_ui = ui.TableView()
 main_ui.name = 'AUFPY'
 add_button_item = ui.ButtonItem()
@@ -91,5 +110,5 @@ time_button_item = ui.ButtonItem()
 time_button_item.title = '%s' % countdown
 main_ui.right_button_items = [add_button_item, time_button_item]
 
-conn = ConnSqlite()
+# conn = ConnSqlite()
 get_all_accounts()
