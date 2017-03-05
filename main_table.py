@@ -27,11 +27,6 @@ def reload_all_texts(code_texts, all_accounts):
 def _get_all_codes():
     global countdown
     conn = ConnSqlite()
-    """
-    根据名称 list 获取 code_texts 列表并调用 _show_all_texts
-    :param name_texts: 名称 list
-    :return: None
-    """
     code_texts = []
     for c in name_texts:
         code_text, countdown = get_code(conn.select_code(c)[0])
@@ -43,10 +38,6 @@ def _get_all_codes():
 def get_all_accounts():
     global name_texts
     conn = ConnSqlite()
-    """
-    从sqlite 中获取所有名称 并调用get_texts
-    :return: None
-    """
     names = conn.select_all()
     name_texts = [name[0] for name in names]
     conn.close_conn()
@@ -54,11 +45,15 @@ def get_all_accounts():
 
 
 def add_button_tapped(sender):
+    global r
     get_input_dict = show_input_dialog()
+    r = False
     return _save_to_db(get_input_dict) if get_input_dict else None
 
 
 def show_input_dialog():
+    global r
+    r = True
     return dialogs.form_dialog(fields=[{'type': 'text', 'key': 'account', 'title': 'account'},
                                {'type': 'text', 'key': 'key', 'title': 'secret key'}])
 
@@ -90,7 +85,7 @@ def check_key(key):
 
 def auto_reload():
     global countdown
-    while True:
+    while main_ui.on_screen or r:
         countdown -= 1
         if countdown == 0:
             get_all_accounts()
@@ -101,6 +96,7 @@ def auto_reload():
 
 
 countdown = 30
+r = False
 main_ui = ui.TableView()
 main_ui.name = 'AUFPY'
 add_button_item = ui.ButtonItem()
